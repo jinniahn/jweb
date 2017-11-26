@@ -9,8 +9,11 @@ def get_parser():
 def main():
     args = get_parser().parse_args()
 
-    from jweb import run_web    
-    driver = run_web.WebClient()
+    from jweb.web_client import WebClient
+    driver = WebClient()
+
+    if args.url:
+        driver.get(args.url)
 
     cmd = '''
     var ret = (function(){

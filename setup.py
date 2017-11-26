@@ -15,7 +15,9 @@ setuptools.setup(
 
     entry_points = {
         'console_scripts': ['js-runner=jweb.jsrunner:main']
-    },    
+    },
+
+    package_data={'jweb': ['data/*.js']},
 
     install_requires=[
         'rpyc', 'selenium'
