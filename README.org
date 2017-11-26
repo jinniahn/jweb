@@ -1,0 +1,73 @@
+* jweb
+
+this is library to control by your python.
+
+* Usage
+
+1. run rpyc_classic.py to hold selenium instance
+
+2. run python code to control your browser
+
+    #+begin_src python :results output replace :exports both
+    from jweb.web_client import WebClient
+    from pprint import pprint
+    client = WebClient()
+    
+    client.get('https://www.python.org/')
+    
+    
+    js = '''
+    var news = jQuery('#content > div > section > div.list-widgets.row > div.medium-widget.blog-widget > div > ul > li > a')
+    
+    var ret = []
+    news.each(function() {
+        ret.push($(this).text())
+    });
+    
+    return ret;
+    '''
+    
+    try:
+        news = client.run_js(js, jquery=True)
+    except:
+        news = []
+    
+    
+    for one in news:
+        print(one)
+    #+end_src
+    
+    #+RESULTS:
+    : Python 3.7.0a2 is the second of four planned alpha releases of Python ...
+    : Python 3.6.3 is now available.  Python 3.6.3 is the third ...
+    : The Python build factories have been busy the last several ...
+    : The latest bugfix release in the Python 2.7 series, Python ...
+    : Python 3.3.7rc1 is now available, the release candidate of Python ...
+
+
+* Installation
+
+#+begin_src sh :results output :exports both
+pip3 install git+https://github.com/jinniahn/jweb.git
+#+end_src
+
+
+* Requirements
+
+  - rpyc
+  - selenium
+  - chrome browser
+
+
+* Compatibility
+
+python3
+
+* Licence
+
+
+MIT
+
+* Authors
+
+  - jinsub ahn <jinniahn@gmail.com>
